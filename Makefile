@@ -24,6 +24,7 @@ $(OUTPUT_FILE): $(GENERATED_FILE) $(ALLOW_FILE) $(DENY_FILE)
 	@echo "! name: $(GOGGLE_NAME)" > $(OUTPUT_FILE)
 	@echo "! description: $(GOGGLE_DESC)" >> $(OUTPUT_FILE)
 	@echo "! public: false" >> $(OUTPUT_FILE)
+	@echo "! author: nph_rd" >> $(OUTPUT_FILE)
 	@echo "" >> $(OUTPUT_FILE)
 	@# Union of generated + allow, minus deny, written as boost rules
 	@comm -23 \
