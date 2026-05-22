@@ -1,4 +1,7 @@
 ! name: talk
 ! description: look for talk
 ! public: false
-! author: nph_rd
+
+$boost,site=reddit.com
+
+$discard
