@@ -2,6 +2,11 @@
 ! description: look for talk
 ! public: false
 
+$boost,site=boards.4chan.org
+$boost,site=forums.somethingawful.com
+$boost,site=mathoverflow.net
 $boost,site=reddit.com
+$boost,site=stackoverflow.com
+$boost,site=wikipedia.org
 
 $discard
