@@ -14,8 +14,8 @@ all: $(OUTPUT_FILE)
 $(OUTPUT_FILE): $(GENERATED_FILE) $(ALLOW_FILE) $(DENY_FILE)
 	@# Warn about any URLs present in both allow and deny
 	@overlap=$$(comm -12 \
-	    <(grep -hE '^[^#[:space:]]' $(ALLOW_FILE) | sort -u) \
-	    <(grep -hE '^[^#[:space:]]' $(DENY_FILE)  | sort -u)); \
+	    <(grep -hE '^[^#[:space:]]' $(ALLOW_FILE) | tr -d '\r' | sort -u) \
+	    <(grep -hE '^[^#[:space:]]' $(DENY_FILE)  | tr -d '\r' | sort -u)); \
 	if [ -n "$$overlap" ]; then \
 	    echo "WARNING: the following URLs appear in both allow and deny:"; \
 	    echo "$$overlap" | sed 's/^/  /'; \
@@ -28,8 +28,8 @@ $(OUTPUT_FILE): $(GENERATED_FILE) $(ALLOW_FILE) $(DENY_FILE)
 	@echo "" >> $(OUTPUT_FILE)
 	@# Union of generated + allow, minus deny, written as boost rules
 	@comm -23 \
-	    <(grep -hE '^[^#[:space:]]' $(GENERATED_FILE) $(ALLOW_FILE) | sort -u) \
-	    <(grep -hE '^[^#[:space:]]' $(DENY_FILE) | sort -u) \
+	    <(grep -hE '^[^#[:space:]]' $(GENERATED_FILE) $(ALLOW_FILE) | tr -d '\r' | sort -u) \
+	    <(grep -hE '^[^#[:space:]]' $(DENY_FILE) | tr -d '\r' | sort -u) \
 	  | awk '{print "$$boost,site="$$1}' >> $(OUTPUT_FILE)
 	@echo "" >> $(OUTPUT_FILE)
 	@echo '$$discard' >> $(OUTPUT_FILE)
